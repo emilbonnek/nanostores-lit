@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactiveController, ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
 
@@ -73,7 +74,7 @@ export class StoreController<AtomType> implements ReactiveController {
  * }
  * ```
  */
-export function useStores(...atoms: WritableAtom<any>[]) {
+export function useStores(...atoms: WritableAtom<unknown>[]) {
   return <T extends new (...args: any[]) => ReactiveControllerHost>(
     constructor: T
   ) => {
