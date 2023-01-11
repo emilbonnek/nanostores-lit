@@ -1,10 +1,15 @@
 {
   "name": "nanostores-lit",
-  "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "version": "0.0.1",
+  "description": "Lit integration for Nano Stores, a tiny state manager with many atomic tree-shakable stores",
+  "keywords": [
+    "store",
+    "state",
+    "state manager",
+    "lit"
+  ],
   "author": "Emil Bonne Kristiansen <emilbonnek@gmail.com",
-  "license": "ISC",
+  "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -12,7 +17,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: not implemented\" && exit 1",
+    "test": "echo \"tests not implemented\"",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
     "prepare": "npm run build",
