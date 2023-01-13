@@ -28,9 +28,11 @@ import { StoreController } from ".";
  * }
  * ```
  */
-export function useStores(...atoms: WritableAtom<unknown>[]) {
-  return <T extends new (...args: any[]) => ReactiveControllerHost>(
-    constructor: T
+export function useStores<TAtoms extends Array<WritableAtom<unknown>>>(
+  ...atoms: TAtoms
+) {
+  return <TConstructor extends new (...args: any[]) => ReactiveControllerHost>(
+    constructor: TConstructor
   ) => {
     return class extends constructor {
       constructor(...args: any[]) {
