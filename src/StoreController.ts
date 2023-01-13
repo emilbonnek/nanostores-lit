@@ -25,10 +25,6 @@ import { WritableAtom } from "nanostores";
 export class StoreController<AtomType> implements ReactiveController {
   private unsubscribe: undefined | (() => void);
 
-  get value() {
-    return this.atom.get();
-  }
-
   constructor(
     private host: ReactiveControllerHost,
     private atom: WritableAtom<AtomType>
@@ -46,5 +42,13 @@ export class StoreController<AtomType> implements ReactiveController {
   // Unsubscribe from the atom when the host disconnects
   hostDisconnected() {
     this.unsubscribe?.();
+  }
+
+  /**
+   * The current value of the atom.
+   * @readonly
+   */
+  get value() {
+    return this.atom.get();
   }
 }
