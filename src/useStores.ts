@@ -4,6 +4,8 @@ import { ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
 import { StoreController } from ".";
 
+type Constructable<T> = new (...args: any[]) => T;
+
 /**
  * @decorator `@useStores`
  * A decorator that creates a new `StoreController` for each atom
@@ -31,7 +33,7 @@ import { StoreController } from ".";
 export function useStores<TAtoms extends Array<WritableAtom<unknown>>>(
   ...atoms: TAtoms
 ) {
-  return <TConstructor extends new (...args: any[]) => ReactiveControllerHost>(
+  return <TConstructor extends Constructable<ReactiveControllerHost>>(
     constructor: TConstructor
   ) => {
     return class extends constructor {

@@ -48,7 +48,7 @@ export class StoreController<AtomType> implements ReactiveController {
    * The current value of the atom.
    * @readonly
    */
-  get value() {
+  get value(): AtomType {
     return this.atom.get();
   }
 }
