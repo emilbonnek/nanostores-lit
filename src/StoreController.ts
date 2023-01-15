@@ -17,7 +17,8 @@ import { WritableAtom } from "nanostores";
  * class MyElement extends LitElement {
  * private controller = new StoreController(this, count);
  *  render() {
- *   return html\`Count: \${this.controller.value}\`;
+ *   const $count = this.controller.value;
+ *   return html\`Count: \${$count}\`;
  *  }
  * }
  * ```
