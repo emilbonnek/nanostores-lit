@@ -16,7 +16,7 @@
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc --target ES5 --experimentalDecorators --emitDecoratorMetadata",
+    "build": "tsc",
     "test": "echo \"tests not implemented\"",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
