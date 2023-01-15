@@ -1,13 +1,7 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
 
-type UnwrappedAtom<Atom extends { get: () => any }> = Atom extends {
-  get: () => infer AtomType;
-}
-  ? AtomType
-  : never;
-
-export class StoresController<TAtoms extends Array<WritableAtom>>
+export class MultiStoreController<TAtoms extends Array<WritableAtom<unknown>>>
   implements ReactiveController
 {
   private unsubscribes: undefined | (() => void)[];
@@ -32,9 +26,10 @@ export class StoresController<TAtoms extends Array<WritableAtom>>
    * The current values of the atoms.
    * @readonly
    */
-  get values(): unknown[] {
-    const vals = this.atoms.map((atom) => atom.get());
-
-    return vals;
+  get values(): {
+    [K in keyof TAtoms]: ReturnType<TAtoms[K]["get"]>;
+  } {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return this.atoms.map(<T>(atom: WritableAtom<T>) => atom.get()) as any;
   }
 }

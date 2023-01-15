@@ -1,5 +1,5 @@
 export { StoreController } from "./StoreController";
-export { StoresController } from "./StoresController";
+export { MultiStoreController as StoresController } from "./StoresController";
 export { useStores } from "./useStores";
 
 // Tuples unwrapped
@@ -31,23 +31,30 @@ type Wrap = {};
 import { atom, WritableAtom } from "nanostores";
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
-import { StoresController } from "./StoresController";
+import { MultiStoreController } from "./StoresController";
 
-const count = atom(0);
-const name = atom("John");
+const countAtom = atom<number>(0);
+const nameAtom = atom<string>("John");
 
-const observedAtoms: [WritableAtom<number>, WritableAtom<string>] = [
-  count,
-  name,
-];
+const observedAtoms = [countAtom, nameAtom] as const;
+
+function getAtomValues<TAtoms extends ReadonlyArray<WritableAtom<unknown>>>(
+  atoms: TAtoms
+): { -readonly [K in keyof TAtoms]: ReturnType<TAtoms[K]["get"]> } {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const vals = atoms.map(<T>(atom: WritableAtom<T>) => atom.get()) as any;
+  return vals;
+}
+
+getAtomValues(observedAtoms);
 
 @customElement("my-element")
 class MyElement extends LitElement {
-  private storesController = new StoresController(this, observedAtoms);
+  private storesController = new MultiStoreController(this, observedAtoms);
 
   render() {
     const vals = this.storesController.values;
     vals;
-    return html`Count: ${count.get()}`;
+    return html`Count: ${countAtom.get()}`;
   }
 }
