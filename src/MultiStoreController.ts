@@ -1,8 +1,9 @@
 import { ReactiveController, ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
 
-export class MultiStoreController<TAtoms extends Array<WritableAtom<unknown>>>
-  implements ReactiveController
+export class MultiStoreController<
+  TAtoms extends ReadonlyArray<WritableAtom<unknown>>
+> implements ReactiveController
 {
   private unsubscribes: undefined | (() => void)[];
 

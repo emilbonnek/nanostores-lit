@@ -1,8 +1,8 @@
 export { StoreController } from "./StoreController";
-export { MultiStoreController as StoresController } from "./StoresController";
+export { MultiStoreController as StoresController } from "./MultiStoreController";
 export { useStores } from "./useStores";
 
-// Tuples unwrapped
+/* // Tuples unwrapped
 const tuple: [number, number, string] = [1, 2, "hey"];
 
 // Function
@@ -31,7 +31,7 @@ type Wrap = {};
 import { atom, WritableAtom } from "nanostores";
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
-import { MultiStoreController } from "./StoresController";
+import { MultiStoreController } from "./MultiStoreController";
 
 const countAtom = atom<number>(0);
 const nameAtom = atom<string>("John");
@@ -54,7 +54,9 @@ class MyElement extends LitElement {
 
   render() {
     const vals = this.storesController.values;
-    vals;
+
+    const [count, name] = vals;
     return html`Count: ${countAtom.get()}`;
   }
 }
+ */
