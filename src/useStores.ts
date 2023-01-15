@@ -3,6 +3,7 @@
 import { ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
 import { StoreController } from ".";
+import { MultiStoreController } from "./MultiStoreController";
 
 type Constructable<T> = new (...args: any[]) => T;
 
@@ -39,10 +40,7 @@ export function useStores<TAtoms extends Array<WritableAtom<unknown>>>(
     return class extends constructor {
       constructor(...args: any[]) {
         super(...args);
-        // Create a new StoreController for each atom
-        for (const atom of atoms) {
-          new StoreController(this, atom);
-        }
+        new MultiStoreController(this, atoms);
       }
     };
   };
