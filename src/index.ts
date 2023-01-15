@@ -1,5 +1,5 @@
 export { StoreController } from "./StoreController";
-export { MultiStoreController as StoresController } from "./MultiStoreController";
+export { MultiStoreController } from "./MultiStoreController";
 export { useStores } from "./useStores";
 
 /* // Tuples unwrapped
@@ -50,7 +50,10 @@ getAtomValues(observedAtoms);
 
 @customElement("my-element")
 class MyElement extends LitElement {
-  private storesController = new MultiStoreController(this, observedAtoms);
+  private storesController = new MultiStoreController(this, [
+    countAtom,
+    nameAtom,
+  ]);
 
   render() {
     const vals = this.storesController.values;
