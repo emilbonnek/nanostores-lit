@@ -24,7 +24,7 @@ Install it:
 npm add nanostores nanostores-lit # or yarn
 ```
 
-Use it:
+Use it as a decorator with `@useStores`:
 
 ```ts
 import { LitElement, html } from "lit";
@@ -42,7 +42,24 @@ class MyHeader extends LitElement {
 }
 ```
 
-Or without the decorators:
+Or as a mixin with `withStores`:
+
+```ts
+import { LitElement, html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { withStores } from "nanostores-lit";
+
+import { profile } from "./stores/profile.js";
+
+@customElement("my-header")
+class MyHeader extends withStores(LitElement, [profile]) {
+  render() {
+    return html`<header>${profile.get().userId}</header>`;
+  }
+}
+```
+
+Or as a Reactive Controller with `StoreController`:
 
 ```ts
 import { LitElement, html } from "lit";
