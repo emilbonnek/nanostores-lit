@@ -2,23 +2,20 @@
 
 import { ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
-import { StoreController } from ".";
+import { Constructable } from "./Constructable";
 import { MultiStoreController } from "./MultiStoreController";
 
-type Constructable<T> = new (...args: any[]) => T;
-
 /**
- * @decorator `@useStores`
- * A decorator that creates a new `StoreController` for each atom
- * and adds it to the host element.
+ * A decorator that creates a new `MultiStoreController` for the atoms
+ * @decorator `withStores(atoms)`
  * @param atoms The atoms to subscribe to.
- * @returns A class decorator that adds a `StoreController` for each atom.
+ *
  * @example
  * ```ts
- * import { atom } from 'nanostores';
- * import { useStores } from 'nanostores/lit';
  * import { LitElement, html } from 'lit';
  * import { customElement } from 'lit/decorators.js';
+ * import { atom } from 'nanostores';
+ * import { useStores } from 'nanostores/lit';
  *
  * const count = atom(0);
  *
