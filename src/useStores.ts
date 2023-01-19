@@ -3,8 +3,6 @@ import { ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
 import { MultiStoreController } from "./MultiStoreController";
 
-import type { Constructable } from "./types";
-
 /**
  * A decorator that creates a new `MultiStoreController` for the atoms
  * @decorator `withStores(atoms)`
@@ -31,7 +29,7 @@ import type { Constructable } from "./types";
 export function useStores<TAtoms extends Array<WritableAtom<unknown>>>(
   ...atoms: TAtoms
 ) {
-  return <TConstructor extends Constructable<ReactiveControllerHost>>(
+  return <TConstructor extends new (...args: any[]) => ReactiveControllerHost>(
     constructor: TConstructor
   ) => {
     return class extends constructor {

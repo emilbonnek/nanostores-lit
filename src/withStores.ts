@@ -3,8 +3,6 @@ import { LitElement } from "lit";
 import { WritableAtom } from "nanostores";
 import { MultiStoreController } from "./MultiStoreController";
 
-import type { Constructable } from "./types";
-
 /**
  * A mixin that subscribes a LitElement to a list of atoms.
  * @mixin `withStores`
@@ -29,7 +27,7 @@ import type { Constructable } from "./types";
  * ```
  */
 export const withStores = <
-  TLitElementClass extends Constructable<LitElement>,
+  TLitElementClass extends new (...args: any[]) => LitElement,
   TAtoms extends Array<WritableAtom<unknown>>
 >(
   LitElementClass: TLitElementClass,
@@ -40,5 +38,5 @@ export const withStores = <
       super(...args);
       new MultiStoreController(this, atoms);
     }
-  } as Constructable & TLitElementClass;
+  } as (new (...args: any[]) => LitElement) & TLitElementClass;
 };
