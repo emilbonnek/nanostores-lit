@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { LitElement } from "lit";
 import { WritableAtom } from "nanostores";
-import { Constructable } from "./Constructable";
 import { MultiStoreController } from "./MultiStoreController";
+
+import type { Constructable } from "./types";
 
 /**
  * A mixin that subscribes a LitElement to a list of atoms.

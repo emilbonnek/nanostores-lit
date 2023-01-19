@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { ReactiveControllerHost } from "lit";
 import { WritableAtom } from "nanostores";
-import { Constructable } from "./Constructable";
 import { MultiStoreController } from "./MultiStoreController";
+
+import type { Constructable } from "./types";
 
 /**
  * A decorator that creates a new `MultiStoreController` for the atoms
