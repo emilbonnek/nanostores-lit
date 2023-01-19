@@ -34,12 +34,10 @@ export const withStores = <
   LitElementClass: TLitElementClass,
   atoms: TAtoms
 ) => {
-  class LitElementWithStores extends LitElementClass {
+  return class LitElementWithStores extends LitElementClass {
     constructor(...args: any[]) {
       super(...args);
       new MultiStoreController(this, atoms);
     }
-  }
-
-  return LitElementWithStores as Constructable;
+  } as Constructable & TLitElementClass;
 };
